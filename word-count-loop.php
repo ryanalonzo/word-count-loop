@@ -1,10 +1,10 @@
 <?php
 $alice = file_get_contents('alice.txt');
-$pattern = ["'", ',',', ','.','-','`','(',')', ':', '_', '"', '!', ';', '?','*'];
+$pattern = ["'", '`', '*', ',', '"', '-', ':', ';', '.', '!', '?', ')', '('];
 $string = str_replace($pattern, '', $alice);
 $needles = explode(' ', strtolower($string));
 foreach ($needles as $key => $val) {
-    if(trim($val) == "") {
+    if(trim($val) == '') {
         unset($needles[$key]);
     }
     if(isset($words[$val])) {
