@@ -14,11 +14,15 @@ foreach ($needles as $key => $val) {
     }
 }
 arsort($words);
-function wordCount($array, $limit = -1)
+function wordCount($array, $limit=-1)
 {
-    $sliced = array_slice($array, 0, $limit);
+    $sliced = array_slice($array, 1, $limit);
     foreach($sliced as $key=>$value) {
-        echo $key . ' ' . $value . "\n";
+        if($key === '') {
+            unset($array[$key]);
+        } else {
+            echo $key . ': ' . $value . "\n";
+        }
     }
 }
 wordCount($words, 5);
