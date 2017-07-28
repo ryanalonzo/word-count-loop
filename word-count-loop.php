@@ -1,16 +1,16 @@
 <?php
 $alice = file_get_contents('alice.txt');
-$pattern = ["'", '`', '*', ',', '"', '-', ':', ';', '.', '!', '?', ')', '('];
-$string = str_replace($pattern, '', $alice);
-$needles = explode(' ', strtolower($string));
+$needles = explode(' ', strtolower($alice));
+
 foreach ($needles as $key => $val) {
-    if(trim($val) == '') {
-        unset($needles[$key]);
-    }
-    if(isset($words[$val])) {
-        $words[$val]++;
+
+    $pattern = ["'", '`',',', '"', '-', ':', ';', '.', '!', '?', ')', '(', '*'];
+    $string = str_replace($pattern, '', $val);
+    $trimmed = trim($string);
+    if(isset($words[$trimmed])) {
+        $words[$trimmed]++;
     } else {
-        $words[$val] = 1;
+        $words[$trimmed] = 1;
     }
 }
 arsort($words);
@@ -19,7 +19,7 @@ function wordCount($array, $limit=-1)
     $sliced = array_slice($array, 1, $limit);
     foreach($sliced as $key=>$value) {
         if($key === '') {
-            unset($array[$key]);
+            unset($array[$value]);
         } else {
             echo $key . ': ' . $value . "\n";
         }
